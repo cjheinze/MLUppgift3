@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let fruits = [
+        Fruit(name: "Apelsin", emoji: "🍊"),
+        Fruit(name: "Banan", emoji: "🍌"),
+        Fruit(name: "Melon", emoji: "🍈"),
+        Fruit(name: "Kiwi", emoji: "🥝"),
+        Fruit(name: "Citron", emoji: "🍋"),
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(fruits, rowContent: { fruit in
+                NavigationLink {
+                    FruitView(fruit: fruit)
+                } label: {
+                    HStack {
+                        Text(fruit.emoji)
+                        Text(fruit.name)
+                    }
+                }
+
+            })
+            .scrollContentBackground(.hidden)
+            .background(LinearGradient(colors: [.red, .orange, .yellow], startPoint: .top, endPoint: .bottom))
+            .navigationTitle("Frukter")
         }
-        .padding()
     }
 }
 
